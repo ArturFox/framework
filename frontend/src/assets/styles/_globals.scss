@@ -1,0 +1,134 @@
+/*src/assets/styles/_globals.scss*/
+
+@use 'helpers' as *;
+
+:root {
+  --bgB: var(--primary-black);
+  --bgW: var(--primary-white);
+
+  --textB: var(--primary-black);
+  --textW: var(--primary-white);
+
+  --accentB: var(--accent-gold);
+  --accentW: var(--accent-red);
+
+  --borderB: var(--primary-black);
+  --borderW: var(--primary-light-gray);
+
+  --filterB: var(--invert(0));
+  --filterW: var(--invert(0));
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+  transition: var(--transition-duration);
+
+}
+
+
+
+body[data-theme="dark"] {
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+}
+
+body[data-theme="light"] {
+  background-color: var(--primary-white);
+  color: var(--primary-black);
+}
+
+body[data-theme="dark"] .card__info {
+  background-color: var(--primary-black);
+  transition: var(--transition-duration);
+}
+
+body[data-theme="light"] .card__info {
+  background-color: var(--primary-white);
+  transition: var(--transition-duration);
+}
+
+
+
+body[data-theme="dark"] .card__title {
+  color: var(--secondary-white);
+}
+
+body[data-theme="light"] .card__title {
+  color: var(--secondary-black);
+}
+
+
+
+
+body[data-theme="dark"] .card__author {
+  color: var(--secondary-white);
+  
+}
+
+body[data-theme="light"] .card__author {
+  color: var(--secondary-black);
+  
+}
+
+
+
+
+body[data-theme="dark"] .card__year {
+  color: var(--accent-gold);
+  
+}
+
+body[data-theme="light"] .card__year {
+  color: var(--accent-red);
+  
+}
+
+
+
+
+body[data-theme="dark"] .card__location {
+  color: var(--accent-gold);
+  
+}
+
+body[data-theme="light"] .card__location {
+  color: var(--accent-red);
+  
+}
+
+
+
+
+body[data-theme="dark"] .inputM__true  {
+  background-color: var(--secondary-black);
+  color: var(--primary-white);
+  border-radius: rem(5);
+  
+}
+
+body[data-theme="light"] .inputM__true  {
+  background-color: var(--primary-white);
+  border: 1px solid var(--primary-light-gray);
+  border-radius: 5px;
+  color: var(--primary-black);
+}
+
+body[data-theme="dark"] .homeheader__suncont  {
+  background-color: var(--secondary-black);
+}
+
+body[data-theme="light"] .homeheader__suncont  { 
+  background-color: var(--secondary-white);
+}
+
+body[data-theme="dark"] .homeheader__logo  {
+  filter: invert(0);
+}
+
+body[data-theme="light"] .homeheader__logo  { 
+  filter: invert(1);
+}

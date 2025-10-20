@@ -1,0 +1,654 @@
+@charset "UTF-8";
+/*src/assets/styles/main.scss*/
+/*src/assets/styles/_variables.scss*/
+/*src/assets/styles/helpers/_index.scss*/
+/*src/assets/styles/helpers/_functions.scss*/
+/*src/assets/styles/helpers/_index.scss*/
+/*src/assets/styles/helpers/_media.scss*/
+/*src/assets/styles/helpers/_index.scss*/
+/*src/assets/styles/helpers/_mixins.scss*/
+:root {
+  --primary-white: #FFFFFF;
+  --primary-black: #121212;
+  --primary-light-gray: #DEDEDE;
+  --primary-dark-gray: #575757;
+  --secondary-white: #FCFCFC;
+  --secondary-black: #1A1818;
+  --secondary-gray: #9C9C9C;
+  --accent-red: #9B4B4B;
+  --accent-gold: #AB8956;
+  --border: 0.0625rem solid var(--color-dark-15);
+  --font-family-base: "Inter", sans-serif;
+  --font-family-accent: "Kumbh Sans", sans-serif;
+  --container-width: 100rem;
+  --container-padding-x: 1rem;
+  --transition-duration: 0.2s;
+}
+@media (min-width: 64.06125rem) {
+  :root {
+    --container-width: 80rem;
+  }
+}
+
+/*src/assets/styles/_normalize.scss*/
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure, fieldset):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями и видео
+ */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+  /**
+    Убираем скачок интерфейса по горизонтали
+    при появлении / исчезновении скроллбара
+   */
+  scrollbar-gutter: stable;
+  /**
+    Плавный скролл
+   */
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Убирает серую подсветку при тапе на мобильных устройствах (iOS/Android)
+ */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+ */
+:where([fill]:not([fill=none],
+[fill^=url])) {
+  fill: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not([stroke=none],
+[stroke^=url])) {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/*src/assets/styles/_globals.scss*/
+:root {
+  --bgB: var(--primary-black);
+  --bgW: var(--primary-white);
+  --textB: var(--primary-black);
+  --textW: var(--primary-white);
+  --accentB: var(--accent-gold);
+  --accentW: var(--accent-red);
+  --borderB: var(--primary-black);
+  --borderW: var(--primary-light-gray);
+  --filterB: var(--invert(0));
+  --filterW: var(--invert(0));
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+  transition: var(--transition-duration);
+}
+
+body[data-theme=dark] {
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+}
+
+body[data-theme=light] {
+  background-color: var(--primary-white);
+  color: var(--primary-black);
+}
+
+body[data-theme=dark] .card__info {
+  background-color: var(--primary-black);
+  transition: var(--transition-duration);
+}
+
+body[data-theme=light] .card__info {
+  background-color: var(--primary-white);
+  transition: var(--transition-duration);
+}
+
+body[data-theme=dark] .card__title {
+  color: var(--secondary-white);
+}
+
+body[data-theme=light] .card__title {
+  color: var(--secondary-black);
+}
+
+body[data-theme=dark] .card__author {
+  color: var(--secondary-white);
+}
+
+body[data-theme=light] .card__author {
+  color: var(--secondary-black);
+}
+
+body[data-theme=dark] .card__year {
+  color: var(--accent-gold);
+}
+
+body[data-theme=light] .card__year {
+  color: var(--accent-red);
+}
+
+body[data-theme=dark] .card__location {
+  color: var(--accent-gold);
+}
+
+body[data-theme=light] .card__location {
+  color: var(--accent-red);
+}
+
+body[data-theme=dark] .inputM__true {
+  background-color: var(--secondary-black);
+  color: var(--primary-white);
+  border-radius: 0.3125rem;
+}
+
+body[data-theme=light] .inputM__true {
+  background-color: var(--primary-white);
+  border: 1px solid var(--primary-light-gray);
+  border-radius: 5px;
+  color: var(--primary-black);
+}
+
+body[data-theme=dark] .homeheader__suncont {
+  background-color: var(--secondary-black);
+}
+
+body[data-theme=light] .homeheader__suncont {
+  background-color: var(--secondary-white);
+}
+
+body[data-theme=dark] .homeheader__logo {
+  filter: invert(0);
+}
+
+body[data-theme=light] .homeheader__logo {
+  filter: invert(1);
+}
+
+/*src/assets/styles/_utils.scss*/
+/*src/assets/styles/blocks/_main.scss*/
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
+@media (min-width: 47.99875rem) {
+  .home {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+}
+@media (min-width: 64.06125rem) {
+  .home {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+}
+@media (min-width: 79.99875rem) {
+  .home {
+    margin-left: 6.25rem;
+    margin-right: 6.25rem;
+  }
+}
+.home__ss {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.25rem;
+}
+@media (min-width: 47.99875rem) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+@media (min-width: 64.06125rem) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+@media (min-width: 79.99875rem) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+@media (any-hover: hover) {
+  .card:hover {
+    transform: scale(1.05);
+  }
+  .card:hover .card__title,
+  .card:hover .card__year {
+    transition: transform 1s ease, opacity 1s ease;
+    transform: translateY(200%);
+    opacity: 0;
+  }
+  .card:hover .card__author,
+  .card:hover .card__location {
+    transition: transform 1s ease, opacity 1s ease;
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+@media (any-hover: none) {
+  .card:active {
+    transform: scale(1.05);
+  }
+  .card:active .card__title,
+  .card:active .card__year {
+    transition: transform 1s ease, opacity 1s ease;
+    transform: translateY(200%);
+    opacity: 0;
+  }
+  .card:active .card__author,
+  .card:active .card__location {
+    transition: transform 1s ease, opacity 1s ease;
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+.card__img {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+.card__info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 25%;
+  width: 85%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: var(--bg);
+  transition: var(--transition-duration);
+}
+@media (min-width: 47.99875rem) {
+  .card__info {
+    width: 85%;
+    height: 30%;
+  }
+}
+@media (min-width: 64.06125rem) {
+  .card__info {
+    width: 75%;
+    height: 30%;
+  }
+}
+@media (min-width: 79.99875rem) {
+  .card__info {
+    width: 75%;
+    height: 30%;
+  }
+}
+.card__dot {
+  opacity: 0;
+  visibility: hidden;
+}
+@media (min-width: 79.99875rem) {
+  .card__dot {
+    opacity: 1;
+    visibility: visible;
+    border: 1px solid var(--accent-gold);
+    height: 100%;
+  }
+}
+.card__text {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.card__text > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+}
+.card__title {
+  font-size: clamp(0.75rem, 0.6694214876rem + 0.3305785124vw, 1rem);
+  transition: transform 1s ease, opacity 1s ease;
+  color: var(--secondary-white);
+}
+.card__year {
+  font-size: clamp(0.5rem, 0.4194214876rem + 0.3305785124vw, 0.75rem);
+  transition: transform 1s ease, opacity 1s ease;
+  color: var(--accent-gold);
+}
+.card__author {
+  font-size: clamp(0.75rem, 0.6694214876rem + 0.3305785124vw, 1rem);
+  opacity: 0;
+  transform: translateX(60%);
+  transition: transform 2s ease, opacity 2s ease;
+  color: var(--secondary-white);
+}
+.card__location {
+  font-size: clamp(0.5rem, 0.4194214876rem + 0.3305785124vw, 0.75rem);
+  opacity: 0;
+  transform: translateX(60%);
+  transition: transform 2s ease, opacity 2s ease;
+  color: var(--accent-gold);
+}
+
+.foot {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+  height: 4rem;
+}
+@media (min-width: 47.99875rem) {
+  .foot {
+    height: 5.5rem;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+}
+@media (min-width: 64.06125rem) {
+  .foot {
+    height: 5rem;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+}
+@media (min-width: 79.99875rem) {
+  .foot {
+    height: 5rem;
+    margin-left: 6.25rem;
+    margin-right: 6.25rem;
+  }
+}
+
+.inputM {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+.inputM__true {
+  width: 100%;
+  height: 2.0625rem;
+  padding-left: 2rem;
+  padding-right: 1rem;
+  background-image: url("../../icons/search/search.svg");
+  background-repeat: no-repeat;
+  background-position: left 0.5rem center;
+  background-size: 1rem 1rem;
+}
+@media (min-width: 47.99875rem) {
+  .inputM__true {
+    width: 18.5rem;
+    height: 2.25rem;
+  }
+}
+@media (min-width: 64.06125rem) {
+  .inputM__true {
+    width: 21rem;
+    height: 2.25rem;
+  }
+}
+@media (min-width: 79.99875rem) {
+  .inputM__true {
+    width: 21rem;
+    height: 2.25rem;
+  }
+}
+
+/*src/assets/styles/blocks/_one-card.scss*/
+/*src/assets/styles/blocks/_main.scss*/
+.homeheader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+  height: 4rem;
+}
+@media (min-width: 47.99875rem) {
+  .homeheader {
+    height: 5.5rem;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+}
+@media (min-width: 64.06125rem) {
+  .homeheader {
+    height: 5rem;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+}
+@media (min-width: 79.99875rem) {
+  .homeheader {
+    height: 5rem;
+    margin-left: 6.25rem;
+    margin-right: 6.25rem;
+  }
+}
+.homeheader__logo {
+  height: 1rem;
+  width: 4.5625rem;
+  filter: invert(0);
+}
+@media (min-width: 64.06125rem) {
+  .homeheader__logo {
+    height: 1.25rem;
+    width: 5.6875rem;
+  }
+}
+@media (min-width: 79.99875rem) {
+  .homeheader__logo {
+    height: 1.25rem;
+    width: 5.6875rem;
+  }
+}
+.homeheader__container {
+  display: flex;
+  align-items: center;
+}
+.homeheader__suncont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--secondary-black);
+}
+.homeheader__sun {
+  height: 1.25rem;
+  width: 1.25rem;
+  filter: invert(0);
+}
+.homeheader__moon {
+  height: 1.25rem;
+  width: 1.25rem;
+  filter: invert(1);
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,12 @@
+/*src/assets/styles/main.scss*/
+
+@use './variables' as *;
+@use './helpers/index' as *;
+@use './normalize';
+@use './fonts';
+@use './globals';
+@use './utils';
+
+@use './blocks/main';
+@use './blocks/one-card';
+@use './blocks/header';

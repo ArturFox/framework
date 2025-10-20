@@ -1,0 +1,73 @@
+/*src/assets/styles/blocks/_main.scss*/
+
+@use '../helpers/media' as *;
+@use '../helpers/functions' as *;
+@use "../helpers/mixins" as *;
+
+.homeheader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: rem(20);
+  margin-right: rem(20);
+  height: rem(64);
+
+  @include tablet {
+    height: rem(88);
+    margin-left: rem(20);
+    margin-right: rem(20);
+  }
+
+  @include laptop {
+    height: rem(80);
+    margin-left: rem(20);
+    margin-right: rem(20);
+  }
+
+  @include desktop {
+    height: rem(80);
+    margin-left: rem(100);
+    margin-right: rem(100);
+  }
+
+  &__logo {
+    height: rem(16);
+    width: rem(73);
+    filter: invert(0);
+
+    @include laptop {
+      height: rem(20);
+      width: rem(91);
+    }
+
+    @include desktop {
+      height: rem(20);
+      width: rem(91);
+    }
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__suncont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include circle(40px, 40px);
+    background-color: var(--secondary-black);
+  }
+
+  &__sun {
+    height: rem(20);
+    width: rem(20);
+    filter: invert(0);
+  }
+
+  &__moon {
+    height: rem(20);
+    width: rem(20);
+    filter: invert(1);
+  }
+}
