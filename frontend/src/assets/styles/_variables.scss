@@ -2,30 +2,29 @@
 
 @use 'helpers' as *;
 
-:root{
-    --primary-white: #FFFFFF;
-    --primary-black: #121212;
-    --primary-light-gray: #DEDEDE;
-    --primary-dark-gray: #575757;
+:root {
+  --primary-white: #ffffff;
+  --primary-black: #121212;
+  --primary-light-gray: #dedede;
+  --primary-dark-gray: #575757;
 
-    --secondary-white: #FCFCFC;
-    --secondary-black: #1A1818;
-    --secondary-gray: #9C9C9C;
+  --secondary-white: #fcfcfc;
+  --secondary-black: #1a1818;
+  --secondary-gray: #9c9c9c;
 
-    --accent-red: #9B4B4B;
-    --accent-gold: #AB8956;
+  --accent-red: #9b4b4b;
+  --accent-gold: #ab8956;
 
-    --border: #{rem(1)} solid var(--color-dark-15);
+  --change-black: #1b1b1b;
+  --change-white: #f3f3f3;
 
-    --font-family-base: 'Inter', sans-serif;
-    --font-family-accent: 'Kumbh Sans', sans-serif;
+  --border: #{rem(1)} solid var(--color-dark-15);
 
-    --container-width: #{rem(1600)};
-    --container-padding-x: #{rem(16)};
+  --font-family-base: 'Inter', sans-serif;
+  --font-family-accent: 'Kumbh Sans', sans-serif;
 
-    --transition-duration: 0.2s;
+  --container-width: #{rem(1600)};
+  --container-padding-x: #{rem(16)};
 
-    @include laptop {
-        --container-width: #{rem(1280)};
-    }
+  --transition-duration: 0.2s;
 }

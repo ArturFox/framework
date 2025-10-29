@@ -19,116 +19,158 @@
   --filterW: var(--invert(0));
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   display: flex;
   flex-direction: column;
-  
   background-color: var(--primary-black);
   color: var(--primary-white);
-  transition: var(--transition-duration);
-
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
 }
 
-
-
-body[data-theme="dark"] {
-  background-color: var(--primary-black);
-  color: var(--primary-white);
+#root {
+  height: 100%;
 }
 
-body[data-theme="light"] {
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0 rem(20);
+
+  @include desktop-above {
+    margin: 0 rem(100);
+  }
+}
+
+body[data-theme='light'] .footer {
   background-color: var(--primary-white);
-  color: var(--primary-black);
 }
 
-body[data-theme="dark"] .card__info {
-  background-color: var(--primary-black);
-  transition: var(--transition-duration);
-}
-
-body[data-theme="light"] .card__info {
+body[data-theme='light'] .footer__nav-item {
   background-color: var(--primary-white);
-  transition: var(--transition-duration);
+
+  @include hover {
+    background-color: rgba(18, 18, 18, 0.05);
+  }
 }
 
-
-
-body[data-theme="dark"] .card__title {
-  color: var(--secondary-white);
-}
-
-body[data-theme="light"] .card__title {
-  color: var(--secondary-black);
-}
-
-
-
-
-body[data-theme="dark"] .card__author {
-  color: var(--secondary-white);
-  
-}
-
-body[data-theme="light"] .card__author {
-  color: var(--secondary-black);
-  
-}
-
-
-
-
-body[data-theme="dark"] .card__year {
-  color: var(--accent-gold);
-  
-}
-
-body[data-theme="light"] .card__year {
-  color: var(--accent-red);
-  
-}
-
-
-
-
-body[data-theme="dark"] .card__location {
-  color: var(--accent-gold);
-  
-}
-
-body[data-theme="light"] .card__location {
-  color: var(--accent-red);
-  
-}
-
-
-
-
-body[data-theme="dark"] .inputM__true  {
-  background-color: var(--secondary-black);
-  color: var(--primary-white);
-  border-radius: rem(5);
-  
-}
-
-body[data-theme="light"] .inputM__true  {
+body[data-theme='light'] .footer__nav-numbers {
   background-color: var(--primary-white);
-  border: 1px solid var(--primary-light-gray);
-  border-radius: 5px;
-  color: var(--primary-black);
+  color: var(--primary-dark-gray);
 }
 
-body[data-theme="dark"] .homeheader__suncont  {
-  background-color: var(--secondary-black);
+body[data-theme='light'] .footer__nav-points {
+  background-color: var(--primary-white);
+  color: var(--primary-dark-gray);
 }
 
-body[data-theme="light"] .homeheader__suncont  { 
-  background-color: var(--secondary-white);
-}
-
-body[data-theme="dark"] .homeheader__logo  {
+body[data-theme='light'] .img {
   filter: invert(0);
 }
 
-body[data-theme="light"] .homeheader__logo  { 
+body[data-theme='light'] .footer__nav-numbers {
+  &::after {
+    content: '';
+    background-color: transparent;
+  }
+
+  @include hover {
+    &::after {
+      background-color: var(--secondary-gray);
+    }
+  }
+
+  &-active {
+    background-color: rgba(18, 18, 18, 0.05);
+
+    @include hover {
+      &::after {
+        content: '';
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+body[data-theme='light'] {
+  background-color: var(--primary-white);
+  color: var(--primary-black);
+}
+
+body[data-theme='light'] .home__container-div {
+  &-search {
+    filter: invert(0);
+  }
+
+  &-input {
+    background-color: var(--primary-white);
+    border: 1px solid var(--primary-light-gray);
+    color: var(--primary-dark-gray);
+
+    &::placeholder {
+      color: var(--secondary-gray);
+    }
+  }
+}
+
+body[data-theme='light'] .gallery {
+  &__notCards {
+    &-h1 {
+      color: var(--primary-dark-gray);
+    }
+
+    &-span {
+      color: var(--primary-black);
+    }
+
+    &-p {
+      color: var(--primary-light-gray);
+    }
+  }
+}
+
+body[data-theme='light'] .card__info {
+  background-color: var(--primary-white);
+
+  &.skeleton-info {
+    background-color: var(--primary-dark-gray);
+  }
+}
+
+body[data-theme='light'] .card__lateral-line {
+  background-color: var(--accent-red);
+}
+
+body[data-theme='light'] .card__title {
+  color: var(--secondary-black);
+}
+
+body[data-theme='light'] .card__author {
+  color: var(--secondary-black);
+}
+
+body[data-theme='light'] .card__year {
+  color: var(--accent-red);
+}
+
+body[data-theme='light'] .card__location {
+  color: var(--accent-red);
+}
+
+body[data-theme='light'] .homeheader__conteiner {
+  background-color: var(--secondary-white);
+
+  @include hover {
+    background-color: var(--change-white);
+  }
+}
+
+body[data-theme='light'] .homeheader__logo {
   filter: invert(1);
 }
