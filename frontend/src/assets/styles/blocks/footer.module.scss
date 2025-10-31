@@ -1,3 +1,5 @@
+/*src/assets/styles/blocks/_footer.scss*/
+
 @use '../helpers/media' as *;
 @use '../helpers/functions' as *;
 @use '../helpers/mixins' as *;
@@ -22,31 +24,31 @@
     margin-bottom: rem(100);
   }
 
-  &__skeleton {
+  .skeleton {
     display: flex;
     justify-content: center;
     width: 100%;
 
-    &-item {
+    .item {
       background-color: var(--primary-dark-gray);
       width: 228px;
       height: 24px;
     }
   }
 
-  &__nav {
+  .nav {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    &-ul {
+    .ul {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: rem(10);
       color: var(--primary-light-gray);
 
-      & > .footer__nav-item {
+      & > .item {
         display: flex;
         background-color: var(--primary-black);
         justify-content: center;
@@ -61,7 +63,7 @@
         }
       }
 
-      & > .footer__nav-numbers {
+      & > .numbers {
         position: relative;
         display: flex;
         justify-content: center;
@@ -90,7 +92,7 @@
           }
         }
 
-        &-active {
+        &.active {
           border-radius: rem(4);
           background-color: var(--primary-dark-gray);
           font-family: 'Inter', serif;
@@ -104,7 +106,7 @@
         }
       }
 
-      & > .footer__nav-points {
+      & > .points {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -114,8 +116,62 @@
       }
     }
   }
+
+  .img {
+    filter: invert(1);
+  }
+
+  &.light{
+    background-color: var(--primary-white);
+
+    .nav {
+      .item {
+        background-color: var(--primary-white);
+
+        @include hover {
+          background-color: rgba(18, 18, 18, 0.05);
+        }
+      }
+
+      .numbers {
+        background-color: var(--primary-white);
+        color: var(--primary-dark-gray);
+
+        &::after {
+          content: '';
+          background-color: transparent;
+        }
+
+        @include hover {
+          &::after {
+            background-color: var(--secondary-gray);
+          }
+        }
+
+        &.active {
+          background-color: rgba(18, 18, 18, 0.05);
+
+          @include hover {
+            &::after {
+              content: '';
+              background-color: transparent;
+            }
+          }
+        }
+      }
+
+      .points {
+        background-color: var(--primary-white);
+        color: var(--primary-dark-gray);
+      }
+    }
+
+    .img {
+      filter: invert(0);
+    }
+
+  }
+
 }
 
-.img {
-  filter: invert(1);
-}
+

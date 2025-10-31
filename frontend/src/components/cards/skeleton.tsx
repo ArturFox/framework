@@ -1,28 +1,28 @@
 /* src/components/cards/CardsSkeleton.tsx */
 
-import { Skeleton } from '@/components/ui/skeleton';
+import styles from '@/assets/styles/blocks/cards-skeleton.module.scss'
+import { Skeleton } from '@/components/ui/skeleton'
 
 interface Props {
-  limit: number;
+  limit: number
 }
 
-export const CardsSkeleton = ({ limit = 4 }: Props) => {
+export function CardsSkeleton({ limit = 4 }: Props) {
   return (
-    <section className="gallery">
-      {Array.from({ length: limit }).map((_, i) => (
-        <div key={i} className="card">
-          <Skeleton className="card__img skeleton-img" />
-
-          <div className="card__info skeleton-info">
-            <div className="card__text skeleton-text">
+    <section className={styles.gallery}>
+      {Array.from({ length: limit }).map(() => (
+        <div key={crypto.randomUUID()} className={styles.card}>
+          <Skeleton className={styles.img} />
+          <div className={styles.info}>
+            <div className={styles.text}>
               <div>
-                <div className="card__title skeleton-title"></div>
-                <div className="card__year skeleton-year"></div>
+                <div className={styles.title}></div>
+                <div className={styles.year}></div>
               </div>
             </div>
           </div>
         </div>
       ))}
     </section>
-  );
-};
+  )
+}

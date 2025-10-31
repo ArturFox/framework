@@ -1,8 +1,8 @@
 /* src/App.tsx */
 
-import { HeaderM } from './semantics/header/header';
-import HomePage from './semantics/main/home';
-import { Footer } from './semantics/footer/footer';
+import { Footer } from './semantics/footer/footer'
+import { HeaderM } from './semantics/header/header'
+import HomePage from './semantics/main/home'
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
 
       <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

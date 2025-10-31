@@ -1,42 +1,48 @@
-/*src/semantics/header/one-header.tsx*/
+/* src/semantics/header/one-header.tsx */
 
-import logo from '../../assets/icons/logo/logo.svg';
-import sun from '../../assets/icons/sun/Vector.svg';
-import moon from '../../assets/icons/moon/Vector (1).svg';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react'
+import { myStore } from '@/store/useStore'
+import logo from '../../assets/icons/logo/logo.svg'
+import moon from '../../assets/icons/moon/Vector (1).svg'
+import sun from '../../assets/icons/sun/Vector.svg'
+import styles from '../../assets/styles/blocks/header.module.scss'
 
-export const HeaderM = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+export function HeaderM() {
+  const theme = myStore(state => state.theme)
+  const setTheme = myStore(state => state.setTheme)
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('status') as 'light' | 'dark' | null;
-    const currentTheme = savedTheme || 'dark';
-    setTheme(currentTheme);
-    document.body.dataset.theme = currentTheme;
-  }, []);
+    const savedTheme = localStorage.getItem('status') as 'light' | 'dark' | null
+    const currentTheme = savedTheme || 'dark'
+    const timeoutId = setTimeout(() => setTheme(currentTheme), 0)
+    document.body.dataset.theme = currentTheme
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [setTheme])
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => {
-      const newTheme = prevTheme === 'dark' ? 'light' : 'dark';
-      document.body.dataset.theme = newTheme;
-      localStorage.setItem('status', newTheme);
-      return newTheme;
-    });
-  };
+    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    setTheme(newTheme)
+    document.body.dataset.theme = newTheme
+    localStorage.setItem('status', newTheme)
+  }
 
   return (
-    <header className="homeheader">
+    <header className={`${styles.homeheader} ${theme === 'light' ? styles.light : ''}`}>
       <div>
-        <img src={logo} alt="logo" className="homeheader__logo" />
+        <img src={logo} alt="logo" className={styles.logo} />
       </div>
 
-      <button className="homeheader__conteiner" onClick={toggleTheme}>
-        {theme === 'dark' ? (
-          <img src={sun} alt="sun" className="homeheader__icon" />
-        ) : (
-          <img src={moon} alt="moon" className="homeheader__icon" />
-        )}
+      <button type="button" className={styles.conteiner} onClick={toggleTheme}>
+        {theme === 'dark'
+          ? (
+              <img src={sun} alt="sun" className={styles.icon} />
+            )
+          : (
+              <img src={moon} alt="moon" className={styles.icon} />
+            )}
       </button>
     </header>
-  );
-};
+  )
+}

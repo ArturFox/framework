@@ -1,5 +1,5 @@
-import { getAuthorsApi, getLocationsApi, getPaintingsApi } from '@/api/api-cards';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit'
+import { getAuthorsApi, getLocationsApi, getPaintingsApi } from '@/api/api-cards'
 
 export const store = configureStore({
   reducer: {
@@ -7,12 +7,12 @@ export const store = configureStore({
     [getAuthorsApi.reducerPath]: getAuthorsApi.reducer,
     [getLocationsApi.reducerPath]: getLocationsApi.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware()
       .concat(getPaintingsApi.middleware)
       .concat(getAuthorsApi.middleware)
       .concat(getLocationsApi.middleware),
-});
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

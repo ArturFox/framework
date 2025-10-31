@@ -1,0 +1,69 @@
+@use '../helpers/media' as *;
+@use '../helpers/functions' as *;
+@use '../helpers/mixins' as *;
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: rem(20);
+
+  @include tablet-above {
+    grid-template-columns: repeat(2, 1fr);
+    gap: rem(24);
+  }
+
+  @include laptop-above {
+    grid-template-columns: repeat(3, 1fr);
+    gap: rem(32);
+  }
+
+  .notCards {
+    display: flex;
+    flex-direction: column;
+    margin-top: rem(60);
+
+    .h1 {
+      display: flex;
+      gap: rem(5);
+      font-family: 'Inter', serif;
+      font-weight: 500;
+      color: var(--primary-light-gray);
+
+      font-size: rem(16);
+      @include responsive-font(20);
+    }
+
+    .span {
+      color: var(--primary-white);
+      font-family: 'Inter', serif;
+      font-weight: 700;
+
+      font-size: rem(16);
+      @include responsive-font(20);
+    }
+
+    .p {
+      color: var(--secondary-gray);
+      font-family: 'Inter', serif;
+      font-weight: 300;
+
+      font-size: rem(14);
+      @include responsive-font(18);
+    }
+  }
+
+  &.light {
+
+    .notCards {
+      .h1 {
+        color: var(--primary-dark-gray);
+      }
+      .span {
+        color: var(--primary-black);
+      }
+      .p {
+        color: var(--primary-light-gray);
+      }
+    }
+  }
+}

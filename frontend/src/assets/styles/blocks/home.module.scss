@@ -1,0 +1,119 @@
+@use '../helpers/media' as *;
+@use '../helpers/functions' as *;
+@use '../helpers/mixins' as *;
+
+.home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+  margin-top: rem(27);
+  margin-bottom: rem(32);
+  min-height: calc(100vh - rem(147));
+
+  @include tablet-above {
+    gap: rem(20);
+    margin-top: rem(44);
+    margin-bottom: rem(40);
+    min-height: calc(100vh - rem(180));
+  }
+
+  @include laptop-above {
+    gap: rem(20);
+    margin-top: rem(44);
+    margin-bottom: rem(40);
+    min-height: calc(100vh - rem(180));
+  }
+
+  @include desktop-above {
+    gap: rem(20);
+    margin-top: rem(44);
+    margin-bottom: rem(40);
+    min-height: calc(100vh - rem(180));
+  }
+
+  .container {
+    @include tablet-above {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    @include laptop-above {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    @include desktop-above {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .div {
+      position: relative;
+
+      .search {
+        position: absolute;
+        padding-left: rem(16);
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        filter: invert(1);
+      }
+
+      .input {
+        height: rem(33);
+        width: 100%;
+        padding-left: rem(48);
+        padding-right: rem(16);
+        color: var(--primary-light-gray);
+        font-size: 12px;
+        background-color: var(--secondary-black);
+        border-radius: rem(5);
+        font-family: 'Inter', serif;
+        font-weight: 300;
+
+        @include tablet-above {
+          width: rem(296);
+          height: rem(36);
+        }
+
+        @include laptop-above {
+          width: rem(336);
+        }
+
+        @include desktop-above {
+          width: rem(336);
+        }
+
+        &::placeholder {
+          font-family: 'Inter', serif;
+          font-weight: 300;
+          color: var(--secondary-gray);
+          size: rem(12);
+          @include responsive-font(14);
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &.light {
+    
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+
+    .container {
+      .search {
+        filter: invert(0);
+      }
+      .input {
+        background-color: var(--primary-white);
+        border: 1px solid var(--primary-light-gray);
+        color: var(--primary-dark-gray);
+
+        &::placeholder {
+          color: var(--secondary-gray);
+        }
+      }
+    }
+  }
+}

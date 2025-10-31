@@ -1,26 +1,36 @@
-/*src/hooks/useImageCache.ts*/
+/* src/hooks/useImageCache.ts */
 
-import type { Painting } from '@/api/api-cards';
-import { cacheImage } from '@/utils/imageCache';
-import { useEffect, useState } from 'react';
+import type { Painting } from '@/api/api-cards'
+import { useEffect, useState } from 'react'
+import { cacheImage } from '@/utils/imageCache'
 
-export const useImageCache = (paintings: Painting[]) => {
-  const [isImagesLoaded, setIsImagesLoaded] = useState<boolean>(true);
+export function useImageCache(paintings: Painting[]) {
+  const [isImagesLoaded, setIsImagesLoaded] = useState<boolean>(true)
 
   useEffect(() => {
     if (paintings.length === 0) {
-      return;
+      return
     }
 
-    setIsImagesLoaded(true);
+    let cancelled = false
 
-    const promises = paintings.map((p) => {
-      const url = `https://test-front.framework.team${p.imageUrl}`;
-      return cacheImage(url);
-    });
+    const loadImages = async () => {
+      if (!cancelled)
+        setIsImagesLoaded(true)
 
-    Promise.allSettled(promises).then(() => setIsImagesLoaded(false));
-  }, [paintings]);
+      const promises = paintings.map(p => cacheImage(`https://test-front.framework.team${p.imageUrl}`))
+      await Promise.allSettled(promises)
 
-  return isImagesLoaded;
-};
+      if (!cancelled)
+        setIsImagesLoaded(false)
+    }
+
+    loadImages()
+
+    return () => {
+      cancelled = true
+    }
+  }, [paintings])
+
+  return isImagesLoaded
+}

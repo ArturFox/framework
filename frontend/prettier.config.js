@@ -6,4 +6,4 @@ export default {
   trailingComma: 'all',
   bracketSpacing: true,
   printWidth: 100,
-};
+}

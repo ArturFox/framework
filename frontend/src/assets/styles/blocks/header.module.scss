@@ -1,4 +1,4 @@
-/*src/assets/styles/blocks/_main.scss*/
+/*src/assets/styles/blocks/_header.module.scss*/
 
 @use '../helpers/media' as *;
 @use '../helpers/functions' as *;
@@ -10,10 +10,11 @@
   justify-content: space-between;
   height: rem(64);
 
-  &__logo {
+  .logo {
     height: rem(16);
     width: rem(73);
     filter: invert(0);
+    user-select: none;
 
     @include desktop-above {
       height: rem(20);
@@ -21,21 +22,51 @@
     }
   }
 
-  &__conteiner {
+  .conteiner {
     display: flex;
     align-items: center;
     justify-content: center;
     @include circle(40px, 40px);
     background-color: var(--secondary-black);
+    outline: none;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:active {
+      outline: none;
+    }
 
     @include hover {
       background-color: var(--change-black);
     }
   }
 
-  &__icon {
+  .icon {
     height: rem(20);
     width: rem(20);
     filter: invert(0);
+    user-select: none;
+
+  }
+
+  &.light {
+    .logo {
+      filter: invert(1);
+    }
+
+    .conteiner {
+      background-color: var(--secondary-white);
+
+      @include hover {
+        background-color: var(--change-white);
+      }
+    }
+
+    .icon {
+      filter: invert(0);
+    }
   }
 }
